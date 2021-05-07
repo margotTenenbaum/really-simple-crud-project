@@ -15,7 +15,17 @@ public class DataService {
     }
 
     public Movie addMovie(Movie newMovie) {
+        newMovie.id = index;
+        index++;
         movieList.add(newMovie);
         return newMovie;
+    }
+
+    public Movie getMovieById(int id) {
+        for (Movie m : movieList) {
+            if (m.getId() == id)
+                return m;
+        }
+        return null;
     }
 }

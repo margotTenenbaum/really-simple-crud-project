@@ -1,6 +1,7 @@
 package com.example.elizabethjesseimdb;
 
 public class Movie {
+    int id;
     String name;
     String year;
     String oscarStatus;
@@ -32,6 +33,8 @@ public class Movie {
     public String getGenre() {
         return genre;
     }
+
+    public int getId() { return id; }
 
     @Override
     public String toString() {

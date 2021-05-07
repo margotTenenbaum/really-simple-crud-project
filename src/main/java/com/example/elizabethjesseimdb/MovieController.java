@@ -23,4 +23,9 @@ public class MovieController {
         dataService.addMovie(newMovie);
         return newMovie;
     }
+
+    @GetMapping("/{id}")
+    public Movie getMovie(@PathVariable int id) {
+        return dataService.getMovieById(id);
+    }
 }

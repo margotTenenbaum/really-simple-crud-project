@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -26,12 +27,14 @@ public class ControllerTests {
     @MockBean
     DataService dataService;
 
+    Movie movie1;
+
     ArrayList<Movie> movieList;
 
     @BeforeEach
     void setup() {
-        movieList = new ArrayList<Movie>();
-        Movie movie1 = new Movie("The Royal Tenenbaums", "2001", "notNominated", "comedy");
+        movieList = new ArrayList<>();
+        movie1 = new Movie("The Royal Tenenbaums", "2001", "notNominated", "comedy");
         movieList.add(movie1);
     }
 
@@ -39,7 +42,7 @@ public class ControllerTests {
     void getMovies() throws Exception {
         when(dataService.getMovies()).thenReturn(movieList);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/movies"))
+        mockMvc.perform(get("/movies"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)));
     }
@@ -49,12 +52,21 @@ public class ControllerTests {
         Movie postMovie = new Movie("Citizen Kane", "1941", "oscarWinner", "drama");
         when(dataService.addMovie(any(Movie.class))).thenReturn(postMovie);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/movies")
+        mockMvc.perform(post("/movies")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"name\":\"Citizen Kane\",\"year\":\"1941\",\"oscarStatus\":\"oscarWinner\",\"genre\":\"drama\"}"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value("Citizen Kane"));
 
+    }
+
+    @Test
+    void getMovieById() throws Exception{
+        when(dataService.getMovieById(1)).thenReturn(movie1);
+
+        mockMvc.perform(get("/movies/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").value("The Royal Tenenbaums"));
     }
 }
