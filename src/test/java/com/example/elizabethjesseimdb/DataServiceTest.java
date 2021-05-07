@@ -55,4 +55,12 @@ public class DataServiceTest {
         Movie actual = dataService.getMovieById(0);
         assertNull(actual);
     }
+
+    @Test
+    void updatedMovieShouldReflectUpdates() {
+        dataService.updateMovie(0, "genre wesAnderson");
+        String expected = "wesAnderson";
+        String actual = dataService.getMovieById(0).genre;
+        assertEquals(expected, actual);
+    }
 }

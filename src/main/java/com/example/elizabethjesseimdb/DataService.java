@@ -43,13 +43,13 @@ public class DataService {
         String[] keyValue = s.split(" ");
         for (Movie m : movieList) {
             if (m.getId() == id) {
-                if (keyValue[0] == "genre") {
+                if (keyValue[0].equals("genre")) {
                     m.setGenre(keyValue[1]);
-                } else if (keyValue[0] == "name") {
+                } else if (keyValue[0].equals("name")) {
                     m.setName(keyValue[1]);
-                } else if (keyValue[0] == "year") {
+                } else if (keyValue[0].equals("year")) {
                     m.setYear(keyValue[1]);
-                } else if (keyValue[0] == "oscarStatus") {
+                } else if (keyValue[0].equals("oscarStatus")) {
                     m.setOscarStatus(keyValue[1]);
                 }
                 return m;
