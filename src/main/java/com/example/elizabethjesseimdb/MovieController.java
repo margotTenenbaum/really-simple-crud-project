@@ -1,8 +1,6 @@
 package com.example.elizabethjesseimdb;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +15,12 @@ public class MovieController {
 
     @GetMapping
     public List<Movie> getMovies() {
+        return dataService.getMovies();
+    }
+
+    @PostMapping
+    public List<Movie> addMovie(@RequestBody Movie newMovie) {
+        dataService.addMovie(newMovie);
         return dataService.getMovies();
     }
 }

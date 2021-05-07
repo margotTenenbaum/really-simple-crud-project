@@ -32,4 +32,9 @@ public class Movie {
     public String getGenre() {
         return genre;
     }
+
+    @Override
+    public String toString() {
+        return "{\"name\":" + name + ", \"year\":" + year + ", \"oscarStatus\":" + oscarStatus + ", \"genre\":" + genre + "}";
+    }
 }
