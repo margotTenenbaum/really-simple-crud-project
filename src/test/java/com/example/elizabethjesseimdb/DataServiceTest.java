@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class DataServiceTest {
     DataService dataService;
@@ -46,5 +47,12 @@ public class DataServiceTest {
         Movie actual = dataService.getMovieById(3);
         assertEquals(4, dataService.getMovies().size());
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void deletedMovieShouldNoLongerBeInDataService() {
+        dataService.deleteMovieById(0);
+        Movie actual = dataService.getMovieById(0);
+        assertNull(actual);
     }
 }
