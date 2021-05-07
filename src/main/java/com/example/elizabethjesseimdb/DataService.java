@@ -13,6 +13,19 @@ public class DataService {
     public List<Movie> getMovies() {
         return movieList;
     }
+    public List<Movie> getMovies(String genre) {
+        if (genre.equals("")) {
+            return movieList;
+        } else {
+            List<Movie> subset = new ArrayList<>();
+            for (Movie m : movieList) {
+                if (m.getGenre().equals(genre)) {
+                    subset.add(m);
+                }
+            }
+            return subset;
+        }
+    }
 
     public Movie addMovie(Movie newMovie) {
         newMovie.id = index;
