@@ -28,4 +28,13 @@ public class DataService {
         }
         return null;
     }
+
+    public Movie deleteMovieById(int id) {
+        for (Movie m : movieList) {
+            if (m.getId() == id)
+                movieList.remove(m);
+                return m;
+        }
+        return null;
+    }
 }

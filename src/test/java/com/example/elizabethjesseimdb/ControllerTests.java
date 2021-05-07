@@ -69,4 +69,13 @@ public class ControllerTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value("The Royal Tenenbaums"));
     }
+
+    @Test
+    void deleteMovieById() throws Exception{
+        when(dataService.deleteMovieById(1)).thenReturn(movie1);
+
+        mockMvc.perform(delete("/movies/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").value("The Royal Tenenbaums"));
+    }
 }

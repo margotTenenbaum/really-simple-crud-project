@@ -28,4 +28,9 @@ public class MovieController {
     public Movie getMovie(@PathVariable int id) {
         return dataService.getMovieById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public Movie deleteMovie(@PathVariable int id) {
+        return dataService.deleteMovieById(id);
+    }
 }
