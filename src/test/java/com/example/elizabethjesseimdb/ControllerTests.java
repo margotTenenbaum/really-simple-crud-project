@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.ArrayList;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -46,14 +47,14 @@ public class ControllerTests {
     @Test
     void addMovie() throws Exception {
         Movie postMovie = new Movie("Citizen Kane", "1941", "oscarWinner", "drama");
-        when(dataService.addMovie(postMovie)).thenReturn(movieList);
+        when(dataService.addMovie(any(Movie.class))).thenReturn(postMovie);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/movies")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"name\":\"Citizen Kane\",\"year\":\"1941\",\"oscarStatus\":\"oscarWinner\",\"genre\":\"drama\"}"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)));
+                .andExpect(jsonPath("name").value("Citizen Kane"));
 
     }
 }

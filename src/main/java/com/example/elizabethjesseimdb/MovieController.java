@@ -19,8 +19,8 @@ public class MovieController {
     }
 
     @PostMapping
-    public List<Movie> addMovie(@RequestBody Movie newMovie) {
+    public Movie addMovie(@RequestBody Movie newMovie) {
         dataService.addMovie(newMovie);
-        return dataService.getMovies();
+        return newMovie;
     }
 }

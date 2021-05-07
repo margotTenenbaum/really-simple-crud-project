@@ -14,8 +14,8 @@ public class DataService {
         return movieList;
     }
 
-    public List<Movie> addMovie(Movie newMovie) {
+    public Movie addMovie(Movie newMovie) {
         movieList.add(newMovie);
-        return movieList;
+        return newMovie;
     }
 }
