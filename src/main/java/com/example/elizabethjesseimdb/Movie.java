@@ -18,6 +18,18 @@ public class Movie {
         this.genre = genre;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public void setOscarStatus(String oscarStatus) {
+        this.oscarStatus = oscarStatus;
+    }
+
     public String getName() {
         return name;
     }
@@ -32,6 +44,10 @@ public class Movie {
 
     public String getGenre() {
         return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public int getId() { return id; }

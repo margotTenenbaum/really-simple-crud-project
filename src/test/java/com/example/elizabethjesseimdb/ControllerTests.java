@@ -78,4 +78,18 @@ public class ControllerTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value("The Royal Tenenbaums"));
     }
+
+    @Test
+    void updateMovie() throws Exception {
+        movie1.setGenre("drama");
+        when(dataService.updateMovie(1, "genre drama")).thenReturn(movie1);
+
+        mockMvc.perform(put("/movies/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("genre drama"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("genre").value("drama"));
+
+    }
 }
