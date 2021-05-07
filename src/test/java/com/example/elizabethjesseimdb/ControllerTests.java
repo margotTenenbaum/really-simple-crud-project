@@ -40,7 +40,7 @@ public class ControllerTests {
 
     @Test
     void getMovies() throws Exception {
-        when(dataService.getMovies()).thenReturn(movieList);
+        when(dataService.getMovies("")).thenReturn(movieList);
 
         mockMvc.perform(get("/movies"))
                 .andExpect(status().isOk())
@@ -91,5 +91,14 @@ public class ControllerTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("genre").value("drama"));
 
+    }
+
+    @Test
+    void getRequestWithQueryParamsGetsCorrectMovie() throws Exception {
+        when(dataService.getMovies("comedy")).thenReturn(movieList);
+
+        mockMvc.perform(get("/movies?genre=comedy"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)));
     }
 }

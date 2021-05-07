@@ -14,8 +14,8 @@ public class MovieController {
     }
 
     @GetMapping
-    public List<Movie> getMovies() {
-        return dataService.getMovies();
+    public List<Movie> getMovies(@RequestParam(defaultValue="", required = false) String genre) {
+        return dataService.getMovies(genre);
     }
 
     @PostMapping
